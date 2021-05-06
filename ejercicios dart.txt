@@ -47,6 +47,17 @@ String compareToDateNowasStringTwo( String date ){
 
 void main() {
  
+  var list  = [ 'apples', 'bananas', 'oranges' ];
+  
+  for( int index = 0; index < list.length; index ++ ){
+    print( 'la fruta desde un for es: ${ list[index] }');
+  }
+  
+  list.forEach( ( String estoEsUnasVariable ) {
+    print( 'la fruta es ${estoEsUnasVariable}' );
+  });
+
+ /*
   print( compareToDateNowasString('2020-11-20') );
   
   print( compareToDateNowasString('2022-09-01') );

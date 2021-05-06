@@ -1,12 +1,11 @@
-class Vehiculo { 
-  int llantas; 
-  int asientos; 
-  String modelo; 
+class Vehiculo {
+  int llantas;
+  int asientos;
+  String modelo;
   String marca;
-  
-  
-  Vehiculo( this.llantas, this.asientos,this.marca, this.modelo );
-  
+
+  Vehiculo(this.llantas, this.asientos, this.marca, this.modelo);
+
   @override
   String toString() {
     return """ 
@@ -18,35 +17,116 @@ class Vehiculo {
       ]
     """;
   }
-  
 }
 
- bool esMayorFunction( int numeroUno, int numeroDos  ){
-   return (numeroUno > numeroDos );
+bool esMayorFunction(int numeroUno, int numeroDos) {
+  return (numeroUno > numeroDos);
 }
 
-int compareToDateNow( String date ){
-  DateTime currentTime =  DateTime.now();
-  DateTime otherDate = DateTime.parse( date );
-  return currentTime.compareTo( otherDate );
+int compareToDateNow(String date) {
+  DateTime currentTime = DateTime.now();
+  DateTime otherDate = DateTime.parse(date);
+  return currentTime.compareTo(otherDate);
 }
 
-String compareToDateNowasString( String date ){
-  DateTime currentTime =  DateTime.now();
-  DateTime otherDate = DateTime.parse( date );
-  int result = currentTime.compareTo( otherDate );
-  return ( ( result >= 0 ) ? 'ahora o en el futuro': ' del pasado' ); 
+String compareToDateNowasString(String date) {
+  DateTime currentTime = DateTime.now();
+  DateTime otherDate = DateTime.parse(date);
+  int result = currentTime.compareTo(otherDate);
+  return ((result >= 0) ? 'ahora o en el futuro' : ' del pasado');
 }
 
-String compareToDateNowasStringTwo( String date ){
-  int result =   DateTime.now().compareTo( DateTime.parse( date) );
-  return ( ( result >= 0 ) ? 'ahora o en el futuro': ' del pasado' );
-  
-  
+String compareToDateNowasStringTwo(String date) {
+  int result = DateTime.now().compareTo(DateTime.parse(date));
+  return ((result >= 0) ? 'ahora o en el futuro' : ' del pasado');
+}
+
+void manejoFechasMomento() {
+  String momento = ((compareToDateNow('2020-11-20') >= 0)
+      ? 'ahora o en el futuro'
+      : ' del pasado');
+
+  print(momento);
+
+  String momentoDos = ((compareToDateNow('2022-09-01') >= 0)
+      ? "ahora o en el futura"
+      : "del pasado");
+
+  print(momentoDos);
+}
+
+/*
+ * Ejemplo Mixin's
+ */
+
+abstract class Animal {}
+
+abstract class Mammal extends Animal {}
+
+abstract class Bird extends Animal {}
+
+abstract class Fish extends Animal {}
+
+class Dolphin extends Mammal with SwimMixin {}
+
+class Bat extends Mammal with WalkMixin, FlyMixin {}
+
+class Cat extends Mammal with WalkMixin {}
+
+class Dove extends Bird with FlyMixin {}
+
+class Duck extends Bird with WalkMixin {}
+
+class Shark extends Fish with SwimMixin {}
+
+class FlyingFish extends Fish with SwimMixin {}
+
+mixin WalkMixin {
+  void walk(String text) => print("walk ${text}");
+
+  void velocity() => print("is very fast");
+}
+
+mixin SwimMixin {
+  void swim(String text) => print("swimmming $text ");
+}
+
+mixin FlyMixin {
+  void fly(String text) => print("flying $text");
+}
+
+Future<String> pickContact() async {
+  await Future.delayed(Duration(seconds: 2));
+  return "phone";
 }
 
 void main() {
- 
+  List<int> numbers = [85, 31];
+  numbers.add(5);
+  numbers.add(20);
+  print(numbers);
+
+  pickContact().then((String value) => print(value));
+
+  /*
+  
+  Dolphin newDolphin = new Dolphin();
+  newDolphin.swim("Norberto");
+  
+  Cat newCat = new Cat();
+  newCat.walk("inari");
+  newCat.velocity();
+  
+  Bat newBat = new Bat();
+  newBat.fly('ricardo');
+  newBat.walk('prueba');
+  
+  DateTime currentDate; 
+  
+  bool isAfter = currentDate?.isAfter( DateTime( 2020,10,1 ) );
+  
+  print( isAfter );
+  
   var list  = [ 'apples', 'bananas', 'oranges' ];
   
   for( int index = 0; index < list.length; index ++ ){
@@ -56,8 +136,7 @@ void main() {
   list.forEach( ( String estoEsUnasVariable ) {
     print( 'la fruta es ${estoEsUnasVariable}' );
   });
-
- /*
+  
   print( compareToDateNowasString('2020-11-20') );
   
   print( compareToDateNowasString('2022-09-01') );
@@ -67,17 +146,8 @@ void main() {
   
   print( compareToDateNowasStringTwo('2022-09-01') );
   
-  /*
-  String momento = ( ( compareToDateNow('2020-11-20') >= 0 ) ? 'ahora o en el futuro': ' del pasado' );
-  
-  print( momento );
-
-  
-  String momentoDos = ( ( compareToDateNow( '2022-09-01' ) >= 0 )? "ahora o en el futura": "del pasado" );
-
-  print( momentoDos );
-  
-  
+  manejoFechasMomento();
+    
   bool isTrue = true;
   bool isTrueTwo = esMayorFunction(5, 6);
 
